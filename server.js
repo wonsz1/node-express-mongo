@@ -22,11 +22,11 @@ const url = 'mongodb://aadmin:zxc123@ds217560.mlab.com:17560/example_db';
 //const url =  'mongodb://user:password@mongo_address:mongo_port/databaseName';
 //const url =  'mongodb://localhost:21017/databaseName';
 
-mongoClient.connect(url, (err, database) => {
+mongoClient.connect(url, (err, client) => {
     if(err) {
         return console.log(err);
     }
-    db = database.db('example_db');
+    db = client.db('example_db');
     
     //start express web server 
     app.listen(8080, () => {
@@ -71,7 +71,7 @@ app.post('/quotes', (req, res) => {
             return console.log(err);
         }
         console.log('quote added to db');
-        res.sendStatus(201);
+        res.redirect('/')
     });
 });
 

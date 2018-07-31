@@ -37,24 +37,6 @@ checkClicksButton.addEventListener('click', e => {
     });
 });
 
-
-// submitButton.addEventListener('click', () => {
-//     console.log('submitButton clicked');
-
-//     fetch('/clicked', { method: 'POST'})
-//     .then(function(response) {
-//         if(response.ok) {
-//             console.log('click was recorded');
-//             return;
-//         }
-//         throw new Error('Request failed');
-//     })
-//     .catch(function(err) {
-//         console.log(err);
-//     })
-// });
-
-
 getQuotesButton.addEventListener('click', e => {
     fetch('/quotes', {method: 'GET'})
     .then(function(response) {
@@ -62,7 +44,11 @@ getQuotesButton.addEventListener('click', e => {
         throw new Error('Request failed');
     })
     .then(function(data) {
-        document.getElementById('quotes').innerHTML = `list: ${data}`;
+        var quotes = '';
+        for(var key in data) {
+            quotes += '<br/>name: ' + data[key].name + '<br/>quote: ' + data[key].quote + '<br/>';
+        }
+        document.getElementById('quotes').innerHTML = `list: <br/> ${quotes}`;
     })
     .catch(function(err) {
         console.log(err);
